@@ -141,15 +141,15 @@ class StickFigureSprite(Sprite):
 
     def turn_left(self, evt):
         if self.y == 0:
-            self.x = -2
+            self.x = -1.25
 
     def turn_right(self, evt):
         if self.y == 0:
-            self.x = 2
+            self.x = 1.25
 
     def jump(self, evt):
         if self.y == 0:
-            self.y = -5
+            self.y = -2
             self.jump_count = 0
 
     def animate(self):
@@ -187,8 +187,16 @@ class StickFigureSprite(Sprite):
         self.animate()
         if self.y < 0:
             self.jump_count += 1
-            if self.jump_count > 20:
-                self.y = 4
+            if self.jump_count >= 50:
+                self.y = 2
+            elif self.jump_count >= 45 and self.jump_count < 50:
+                self.y = -1
+            elif self.jump_count >= 35 and self.jump_count < 45:
+                self.y = -1.5
+            elif self.jump_count >= 25 and self.jump_count < 35:
+                self.y = -2
+            elif self.jump_count >= 1 and self.jump_count < 25:
+                self.y = -3
         if self.y > 0:
             self.jump_count -= 1
         co = self.coords()
@@ -237,7 +245,7 @@ class StickFigureSprite(Sprite):
     
         if falling and bottom and self.y == 0 \
                 and co.y2 < self.game.canvas_height:
-            self.y = 4
+            self.y = 2
         self.game.canvas.move(self.image, self.x, self.y)
         
 g = Game()
@@ -248,13 +256,13 @@ g = Game()
 platform1 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform100.gif"), \
                            20, 420, 100, 10)
 platform2 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform60.gif"), \
-                           170, 380, 60, 10)
+                           190, 380, 60, 10)
 platform3 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform100.gif"), \
-                           240, 340, 100, 10)
+                           300, 340, 100, 10)
 platform4 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform30.gif"), \
-                           170, 300, 30, 10)
+                           270, 230, 30, 10)
 platform5 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform60.gif"), \
-                           50, 300, 60, 10)
+                           410, 270, 60, 10)
 platform6 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform60.gif"), \
                            10, 240, 60, 10)
 platform7 = PlatformSprite(g, PhotoImage(file="gif_objects/platforms/platform100.gif"), \
